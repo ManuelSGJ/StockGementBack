@@ -4,5 +4,6 @@
     "database": "chatbox",
     "host": "localhost",
     "port": 3307,
+    "logging": false,
     "dialect": "mysql"
 }

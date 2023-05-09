@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { Op } from "sequelize"
+import { Op } from 'sequelize'
 import { success, error } from '../../network/response.js'
 import { createOwner, findOwners, loginOwner, findOwnerByPK, updateOwner, deleteOwner } from './controller.js';
 

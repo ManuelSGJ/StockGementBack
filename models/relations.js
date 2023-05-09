@@ -12,9 +12,9 @@ export const profile = Database.define('profile', {
         allowNull: true,
     }
 },
-{
-    timestamps: false
-}
+    {
+        timestamps: false
+    }
 )
 
 
@@ -29,9 +29,9 @@ export const user = Database.define('countSistem', {
         allowNull: true,
     }
 },
-{
-    timestamps: false
-}
+    {
+        timestamps: false
+    }
 )
 
 profile.hasOne(user, {

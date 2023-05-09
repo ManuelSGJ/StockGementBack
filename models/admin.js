@@ -23,13 +23,17 @@ const Admins = Database.define('Administradores', {
         allowNull: false
     },
     Admin_telefono: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     Admin_direccion: {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: ''
+    },
+    Admin_password: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
     Admin_fecha_creacion: {
         type: DataTypes.DATEONLY,
