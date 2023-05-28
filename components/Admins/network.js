@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Op } from 'sequelize';
 import { success, error } from '../../network/response.js';
-import { createAdmin, findAdmins, findAdminByPK, updateAdmin, deleteAdmin } from './controller.js';
+import { createAdmin, findAdmins, findAdminByPK, updateAdmin, deleteAdmin, loginAdmin } from './controller.js';
 
 const router = Router()
 
@@ -30,6 +30,14 @@ router.get('/id/:id', (req, res) => {
     findAdminByPK(req.params.id)
         .then(infoAdmin => success(req, res, infoAdmin, 200))
         .catch(err => catchError(req, res, err))
+})
+
+router.post('/login', (req, res) => {
+    loginAdmin(req.body)
+    .then(admin => {
+        success(req, res, admin, 200)
+    })
+    .catch(err => catchError(req, res, err))
 })
 
 router.post('/createAdmin', (req, res) => {

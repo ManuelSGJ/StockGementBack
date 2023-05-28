@@ -1,7 +1,50 @@
-import Admins from '../../models/admin.js';
 import Admin from '../../models/admin.js'
 import Empresa from '../../models/empresa.js';
 import { encryptText, decryptText } from '../functions/cryptography.js';
+
+export const loginAdmin = (infoAdmin) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const {user, password} = infoAdmin
+
+            const adminFound = await Admin.findOne({
+                where: {
+                    Admin_cedula: user
+                }
+            })
+
+            if (adminFound == null) {
+                reject({
+                    TypeError: 'client error',
+                    errorDescription: 'userNotFound',
+                    isValid: false
+                })
+            }
+
+            const {dataValues: userInfo} = adminFound
+
+            if (password != decryptText(userInfo.Admin_password)) {
+                reject({
+                    TypeError: 'client error',
+                    errorDescription: 'incorrectPassword',
+                    isValid: false
+                })
+            }
+
+            userInfo.typeUser = 'Admin'
+            resolve({
+                userInfo
+            })
+
+        } catch (error) {
+            reject({
+                typeError: 'internal error',
+                errorDescription: 'Ha ocurrido un error al consultar el usuario para login',
+                errorMessage: error
+            })
+        }
+    })
+}
 
 export const createAdmin = (infoAdmin) => {
     return new Promise(async (resolve, reject) => {

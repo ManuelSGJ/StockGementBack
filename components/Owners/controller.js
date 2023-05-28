@@ -2,9 +2,10 @@ import Owner from "../../models/owner.js"
 import { encryptText, decryptText } from "../functions/cryptography.js"
 import { Op } from "sequelize"
 
-export const loginOwner = ({user: email, password}) => {
+export const loginOwner = (infoOwner) => {
     return new Promise(async (resolve, reject) => {
         try {
+            const {user: email, password} = infoOwner
             const userFound = await Owner.findOne({
                 where: {
                     email
@@ -19,7 +20,7 @@ export const loginOwner = ({user: email, password}) => {
                 reject({
                     typeError: 'client error', 
                     errorDescription: 'userNotFound',
-                    isValid: false,
+                    isValid: false
                 })
             }
 

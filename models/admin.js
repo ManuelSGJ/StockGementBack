@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import Database from "../database/connection.js";
 import Empresa from "./empresa.js";
 
-const Admins = Database.define('Administradores', {
+const Admin = Database.define('Administradores', {
     Admin_id: {
         type: DataTypes.INTEGER,
         primaryKey: true, 
@@ -41,7 +41,7 @@ const Admins = Database.define('Administradores', {
     }
 })
 
-Empresa.hasMany(Admins, {
+Empresa.hasMany(Admin, {
     foreignKey: {
         name: 'Admin_nit_empresa_FK',
         allowNull: false,
@@ -50,7 +50,7 @@ Empresa.hasMany(Admins, {
     onUpdate: 'CASCADE'
 })
 
-Admins.belongsTo(Empresa, {
+Admin.belongsTo(Empresa, {
     foreignKey: {
         name: 'Admin_nit_empresa_FK',
         allowNull: false,
@@ -59,4 +59,4 @@ Admins.belongsTo(Empresa, {
     onUpdate: 'CASCADE'
 })
 
-export default Admins
+export default Admin
