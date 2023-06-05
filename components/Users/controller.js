@@ -2,7 +2,7 @@ import User from '../../models/user.js'
 import Empresa from '../../models/empresa.js'
 import { encryptText, decryptText } from '../functions/cryptography.js'
 
-export const createUser = (infoUser) => {
+const createUser = (infoUser) => {
     return new Promise(async (resolve, reject) => {
         try {
             const {cedula, nombre, apellido, telefono, empresa, password, sections} = infoUser
@@ -29,7 +29,7 @@ export const createUser = (infoUser) => {
     })
 }
 
-export const findUsers = (params) => {
+const findUsers = (params) => {
     return new Promise(async (resolve, reject) => {
         try {
             
@@ -59,7 +59,7 @@ export const findUsers = (params) => {
     })
 }
 
-export const findUserByPK = (id) => {
+const findUserByPK = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             
@@ -94,7 +94,7 @@ export const findUserByPK = (id) => {
     })
 }
 
-export const updateUser = (id, infoUser) => {
+const updateUser = (id, infoUser) => {
     return new Promise(async (resolve, reject) => {
         try {
 
@@ -134,7 +134,7 @@ export const updateUser = (id, infoUser) => {
     })
 }
 
-export const deleteUser = (id) => {
+const deleteUser = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
 
@@ -163,4 +163,12 @@ export const deleteUser = (id) => {
             })
         }
     })
+}
+
+export {
+    createUser,
+    findUsers,
+    findUserByPK,
+    updateUser,
+    deleteUser
 }

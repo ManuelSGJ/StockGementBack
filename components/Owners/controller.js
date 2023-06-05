@@ -2,7 +2,7 @@ import Owner from "../../models/owner.js"
 import { encryptText, decryptText } from "../functions/cryptography.js"
 import { Op } from "sequelize"
 
-export const loginOwner = (infoOwner) => {
+const loginOwner = (infoOwner) => {
     return new Promise(async (resolve, reject) => {
         try {
             const {user: email, password} = infoOwner
@@ -52,7 +52,7 @@ export const loginOwner = (infoOwner) => {
     })   
 }
 
-export const createOwner = (infoOwner) => {
+const createOwner = (infoOwner) => {
     return new Promise(async (resolve, reject) => {
         try {
             const {password} = infoOwner
@@ -67,7 +67,7 @@ export const createOwner = (infoOwner) => {
     })
 }
 
-export const findOwners = (params = {}) => {
+const findOwners = (params = {}) => {
     return new Promise(async (resolve, reject) => {
         try {
             let owners = await Owner.findAll(params)
@@ -84,7 +84,7 @@ export const findOwners = (params = {}) => {
     })
 }
 
-export const findOwnerByPK = (id) => {
+const findOwnerByPK = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             const OwnerFound = await Owner.findByPk(id)
@@ -113,7 +113,7 @@ export const findOwnerByPK = (id) => {
     })
 }
 
-export const updateOwner = (data, id) => {
+const updateOwner = (data, id) => {
     return new Promise(async (resolve, reject) => {
         try {
             const {password} = data
@@ -146,7 +146,7 @@ export const updateOwner = (data, id) => {
     })
 }
 
-export const deleteOwner = (id) => {
+const deleteOwner = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
 
@@ -178,4 +178,11 @@ export const deleteOwner = (id) => {
     })
 }
 
-
+export {
+    loginOwner,
+    createOwner,
+    findOwners,
+    findOwnerByPK,
+    updateOwner,
+    deleteOwner
+}

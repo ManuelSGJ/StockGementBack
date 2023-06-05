@@ -1,7 +1,6 @@
 import Empresa from '../../models/empresa.js';
-import { encryptText, decryptText } from '../functions/cryptography.js';
 
-export const createEmpresa = (infoEmpresa) => {
+const createEmpresa = (infoEmpresa) => {
     return new Promise(async (resolve, reject) => {
 
         const data = {
@@ -27,7 +26,7 @@ export const createEmpresa = (infoEmpresa) => {
     })
 }
 
-export const findEmpresas = (params) => {
+const findEmpresas = (params) => {
     return new Promise(async (resolve, reject) => {
         try {
 
@@ -48,7 +47,7 @@ export const findEmpresas = (params) => {
     })
 }
 
-export const findEmpresaByPk = (id) => {
+const findEmpresaByPk = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
 
@@ -74,7 +73,7 @@ export const findEmpresaByPk = (id) => {
     })
 }
 
-export const updateEmpresa = (infoEmpresa, id) => {
+const updateEmpresa = (infoEmpresa, id) => {
     return new Promise( async (resolve, reject) => {
         try {
 
@@ -114,7 +113,7 @@ export const updateEmpresa = (infoEmpresa, id) => {
     })
 }
 
-export const deleteEmpresa = (id) => {
+const deleteEmpresa = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
 
@@ -144,4 +143,12 @@ export const deleteEmpresa = (id) => {
             })
         }
     })  
+}
+
+export {
+    createEmpresa,
+    findEmpresas,
+    findEmpresaByPk,
+    updateEmpresa,
+    deleteEmpresa
 }

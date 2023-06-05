@@ -10,7 +10,7 @@ const GrupoArticulo = Database.define('Grupos_articulos', {
     },
 
     Grupo_nombre: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     }
 })
@@ -23,7 +23,7 @@ Empresa.hasMany(GrupoArticulo, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 })
-Empresa.belongsTo(GrupoArticulo, {
+GrupoArticulo.belongsTo(Empresa, {
     foreignKey: {
         name: 'Grupo_nit_empresa_FK'
     },

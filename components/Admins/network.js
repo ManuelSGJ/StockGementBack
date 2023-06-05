@@ -1,10 +1,50 @@
 import { Router } from 'express';
 import { Op } from 'sequelize';
 import { success, error } from '../../network/response.js';
-import { createAdmin, findAdmins, findAdminByPK, updateAdmin, deleteAdmin, loginAdmin } from './controller.js';
+import {
+    loginAdmin,
+    createAdmin,
+    findAdmins,
+    findAdminByPK,
+    updateAdmin,
+    deleteAdmin
+} from './controller.js';
+import {
+    createGroup,
+    findGroups,
+    updateGroup,
+    deleteGroup
+} from './groups/controllerGroups.js'
 
 const router = Router()
 
+//* groups process
+router.get('/findGroups', (req, res) => {
+    findGroups(req.query.empresa)
+        .then(groupsFound => success(req, res, groupsFound, 200))
+        .catch(err => catchError(req, res, err))
+})
+
+router.post('/createGroup', (req, res) => {
+    createGroup(req.body)
+        .then(newGroup => success(req, res, newGroup, 200))
+        .catch(err => catchError(req, res, err))
+})
+
+router.put('/updateGroup', (req, res) => {
+    updateGroup(req.body)
+        .then(updatedGroup => success(req, res, updatedGroup, 200))
+        .catch(err => catchError(req, res, err))
+})
+
+router.delete('/deleteGroup', (req, res) => {
+    deleteGroup(req.body)
+        .then(groupDeleted => success(req, res, groupDeleted, 200))
+        .catch(err => catchError(req, res, err))
+})
+
+
+//* admin process
 router.get('/', (req, res) => {
     findAdmins({})
         .then(administradores => success(req, res, administradores, 200))
@@ -34,10 +74,10 @@ router.get('/id/:id', (req, res) => {
 
 router.post('/login', (req, res) => {
     loginAdmin(req.body)
-    .then(admin => {
-        success(req, res, admin, 200)
-    })
-    .catch(err => catchError(req, res, err))
+        .then(admin => {
+            success(req, res, admin, 200)
+        })
+        .catch(err => catchError(req, res, err))
 })
 
 router.post('/createAdmin', (req, res) => {
@@ -70,6 +110,8 @@ router.delete('/deleteAdmin/:id', (req, res) => {
         .catch(err => catchError(req, res, err))
 })
 
+
+//* error management
 const catchError = (req, res, err) => {
     if (err.typeError === 'internal error') {
         error(req, res, 'Ha ocurrido un error', 505, err)

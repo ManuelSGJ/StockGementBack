@@ -1,8 +1,8 @@
-import Admin from '../../models/admin.js'
+import Admin from '../../models/admin.js';
 import Empresa from '../../models/empresa.js';
 import { encryptText, decryptText } from '../functions/cryptography.js';
 
-export const loginAdmin = (infoAdmin) => {
+const loginAdmin = (infoAdmin) => {
     return new Promise(async (resolve, reject) => {
         try {
             const {user, password} = infoAdmin
@@ -46,7 +46,7 @@ export const loginAdmin = (infoAdmin) => {
     })
 }
 
-export const createAdmin = (infoAdmin) => {
+const createAdmin = (infoAdmin) => {
     return new Promise(async (resolve, reject) => {
         const {cedula, nombre, apellido, telefono, direccion, empresa, password} = infoAdmin
 
@@ -64,7 +64,6 @@ export const createAdmin = (infoAdmin) => {
         try {
             const newAdmin = await Admin.create(data)
             resolve({newAdmin, process: 'succesfully'})
-
         } catch (error) {
             reject({
                 typeError: 'internal error',
@@ -77,10 +76,9 @@ export const createAdmin = (infoAdmin) => {
     })
 }
 
-export const findAdmins = (params) => {
+const findAdmins = (params) => {
     return new Promise(async (resolve, reject) => {
         try {
-            
             let administradores = await Admin.findAll({
                     where: params,
                     include: [
@@ -107,7 +105,7 @@ export const findAdmins = (params) => {
     })
 }
 
-export const findAdminByPK = (id) => {
+const findAdminByPK = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             const adminFound = await Admin.findOne({
@@ -141,7 +139,7 @@ export const findAdminByPK = (id) => {
     })
 }
 
-export const updateAdmin = (infoAdmin, id) => {
+const updateAdmin = (infoAdmin, id) => {
     return new Promise(async (resolve, reject) => {
         try {
             const {cedula, nombre, apellido, telefono, direccion, empresa, password} = infoAdmin
@@ -183,8 +181,7 @@ export const updateAdmin = (infoAdmin, id) => {
     })
 }
 
-export const deleteAdmin = (id) => {
-    console.log(id);
+const deleteAdmin = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             let adminDeleted = await Admin.destroy({
@@ -211,4 +208,13 @@ export const deleteAdmin = (id) => {
             })
         }
     })
+}
+
+export {
+    loginAdmin,
+    createAdmin,
+    findAdmins,
+    findAdminByPK,
+    updateAdmin,
+    deleteAdmin
 }
