@@ -30,6 +30,7 @@ const createGroup = (groupInfo) => {
         try {
             const { nameGroup, empresaGroup } = groupInfo
 
+            console.log(nameGroup, empresaGroup);
             const data = {
                 Grupo_nombre: nameGroup,
                 Grupo_nit_empresa_FK: decryptText(empresaGroup)

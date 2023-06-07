@@ -1,22 +1,37 @@
 import { Router } from 'express';
 import { Op } from 'sequelize';
 import { success, error } from '../../network/response.js';
-import {
-    loginAdmin,
-    createAdmin,
-    findAdmins,
-    findAdminByPK,
-    updateAdmin,
-    deleteAdmin
-} from './controller.js';
-import {
-    createGroup,
-    findGroups,
-    updateGroup,
-    deleteGroup
-} from './groups/controllerGroups.js'
+import { loginAdmin, createAdmin, findAdmins, findAdminByPK, updateAdmin, deleteAdmin } from './controller.js';
+import { createGroup, findGroups, updateGroup, deleteGroup } from './groups/controllerGroups.js'
+import { createBrand, findBrands, updateBrand, deleteBrand } from './brands/controllerBrands.js'
 
 const router = Router()
+
+//* brands process
+router.get('/findBrands', (req, res) => {
+    findBrands(req.query.empresa)
+        .then(brandsFound => success(req, res, brandsFound, 200))
+        .catch(err => catchError(req, res, err))
+})
+
+router.post('/createBrand', (req, res) => {
+    createBrand(req.body)
+        .then(newBrand => success(req, res, newBrand, 200))
+        .catch(err => catchError(req, res, err))
+})
+
+router.put('/updateBrand', (req, res) => {
+    updateBrand(req.body)
+        .then(updatedBrand => success(req, res, updatedBrand, 200))
+        .catch(err => catchError(req, res, err))
+})
+
+router.delete('/deleteBrand', (req, res) => {
+    deleteBrand(req.body)
+        .then(brandDeleted => success(req, res, brandDeleted, 200))
+        .catch(err => catchError(req, res, err))
+})
+
 
 //* groups process
 router.get('/findGroups', (req, res) => {
