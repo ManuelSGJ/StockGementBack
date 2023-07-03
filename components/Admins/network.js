@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { Op } from 'sequelize';
-import { success, error } from '../../network/response.js';
+import { success, error } from '../../network/response.js'
 import { loginAdmin, createAdmin, findAdmins, findAdminByPK, updateAdmin, deleteAdmin } from './controller.js';
-import { createGroup, findGroups, updateGroup, deleteGroup } from './groups/controllerGroups.js'
-import { createBrand, findBrands, updateBrand, deleteBrand } from './brands/controllerBrands.js'
+import { createGroup, findGroups, updateGroup, deleteGroup } from './groups/controllerGroups.js';
+import { createBrand, findBrands, updateBrand, deleteBrand } from './brands/controllerBrands.js';
+import { createArticle, findArticles } from './articles/controllerArticle.js';
 
 const router = Router()
 
@@ -55,6 +56,26 @@ router.put('/updateGroup', (req, res) => {
 router.delete('/deleteGroup', (req, res) => {
     deleteGroup(req.body)
         .then(groupDeleted => success(req, res, groupDeleted, 200))
+        .catch(err => catchError(req, res, err))
+})
+
+
+//* articles process
+router.get('/findArticles', (req, res) => {
+    findArticles(req.query.empresa)
+        .then(articlesFound => success(req, res, articlesFound, 200))
+        .catch(err => catchError(req, res, err))
+})
+
+router.post('/createArticle', (req, res) => {
+    for (const element in req.body) {
+        if (req.body[element].trim() === '') {
+            return error(req, res, 'Datos incompletos', 400, 'datos incompletos para creacion de un articulo')
+        }
+    }
+
+    createArticle(req.body)
+        .then(articleCreated => success(req, res, articleCreated, 200))
         .catch(err => catchError(req, res, err))
 })
 

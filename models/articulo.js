@@ -51,7 +51,7 @@ const Articulo = Database.define('Articulos', {
     // }
 
     Articulo_info_adicional: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false
     },
 

@@ -1,5 +1,5 @@
-import Marca from '../../../models/marca.js'
-import { decryptText } from '../../functions/cryptography.js'
+import Marca from '../../../models/marca.js';
+import { decryptText } from '../../functions/cryptography.js';
 
 const findBrands = (empresa) => {
     return new Promise(async (resolve, reject) => {
